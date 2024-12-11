@@ -41,12 +41,4 @@ public class Dimension {
         this.hauteur = hauteur;
     }
 
-    @Override
-    public String toString() {
-        return "Dimension{" +
-                "longueur=" + longueur +
-                ", largeur=" + largeur +
-                ", hauteur=" + hauteur +
-                '}';
-    }
 }

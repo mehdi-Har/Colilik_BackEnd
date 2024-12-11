@@ -15,9 +15,16 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+//    @PostMapping
+//    public Order createOrder(@RequestBody Order order) {
+//        return orderService.createOrder(order);
+//    }
     @PostMapping
-    public Order createOrder(@RequestBody Order order) {
-        return orderService.createOrder(order);
+    public Order createOrder(
+            @RequestParam String announcementId,
+            @RequestParam String driverId,
+            @RequestParam double amount) {
+        return orderService.createOrder(announcementId, driverId, amount);
     }
 
     @GetMapping

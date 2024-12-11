@@ -1,31 +1,45 @@
 package ma.ac.emi.co_transport_de_colis.entities;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "customers")
 public class Customer extends User {
-
     private double walletBalance;
     private int totalOrders;
 
-    public Customer(String userId, String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN) {
-        super(userId, password, fullName, userEmail, numero, rating, numeroCIN, imageCIN);
+    @DBRef
+    private List<Announcement> announcements= new ArrayList<>();
+
+    public Customer(String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN, double walletBalance, int totalOrders) {
+        super( password, fullName, userEmail, numero, rating, numeroCIN, imageCIN);
+        this.setWalletBalance(walletBalance);
+        this.setTotalOrders(totalOrders);
     }
 
-    public Customer(String numero, Double rating, String numeroCIN, String imageCIN) {
+    public Customer(String numero, Double rating, String numeroCIN, String imageCIN, double walletBalance, int totalOrders) {
         super(numero, rating, numeroCIN, imageCIN);
+        this.walletBalance = walletBalance;
+        this.totalOrders = totalOrders;
+    }
+    public Customer() {}
+
+    public List<Announcement> getAnnouncements() {
+        return announcements;
     }
 
-    public Customer(String userId, String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN, int totalOrders, double walletBalance) {
-        super(userId, password, fullName, userEmail, numero, rating, numeroCIN, imageCIN);
-        this.totalOrders = totalOrders;
-        this.walletBalance = walletBalance;
+    public void setAnnouncements(List<Announcement> announcements) {
+        this.announcements = announcements;
     }
 
-    public Customer(String numero, Double rating, String numeroCIN, String imageCIN, int totalOrders, double walletBalance) {
-        super(numero, rating, numeroCIN, imageCIN);
-        this.totalOrders = totalOrders;
-        this.walletBalance = walletBalance;
+    public void addAnnouncement(Announcement announcement) {
+        this.announcements.add(announcement);
+    }
+    public void removeAnnouncement(Announcement announcement) {
+        this.announcements.remove(announcement);
     }
 
     public double getWalletBalance() {
@@ -44,11 +58,4 @@ public class Customer extends User {
         this.totalOrders = totalOrders;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "walletBalance=" + walletBalance +
-                ", totalOrders=" + totalOrders +
-                '}';
-    }
 }

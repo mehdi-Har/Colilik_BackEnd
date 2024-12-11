@@ -11,43 +11,43 @@ import java.util.List;
 @Document(collection = "announcements")
 public class Announcement {
     @Id
-    private String idAnnouncement;
-    private String customerId;
+    private String announcementId;
+    @DBRef
+    private Customer customer;
     private String description;
     private LocalDateTime pickUpTime;
     private String dropUpFrom;
     private String dropTo;
     private LocalDateTime deliveryTime;
-    private double propositionCustomer;
+    private boolean status= false;
+    private List<DriverProposal> driverProposals;
     @DBRef
     private List<Item> items= new ArrayList<>();
 
-    public Announcement(String idAnnouncement, String customerId, String description, LocalDateTime pickUpTime, String dropUpFrom, String dropTo, LocalDateTime deliveryTime, double propositionCustomer) {
-        this.idAnnouncement = idAnnouncement;
-        this.customerId = customerId;
-        this.description = description;
-        this.pickUpTime = pickUpTime;
-        this.dropUpFrom = dropUpFrom;
-        this.dropTo = dropTo;
-        this.deliveryTime = deliveryTime;
-        this.propositionCustomer = propositionCustomer;
+    public Announcement(Customer customer, String description, LocalDateTime pickUpTime, String dropUpFrom, String dropTo, LocalDateTime deliveryTime) {
+        this.setCustomer(customer);
+        this.setDescription(description);
+        this.setPickUpTime(pickUpTime);
+        this.setDropUpFrom(dropUpFrom);
+        this.setDropTo(dropTo);
+        this.setDeliveryTime(deliveryTime);
     }
     public Announcement(){}
 
-    public String getIdAnnouncement() {
-        return idAnnouncement;
+    public String getAnnouncementId() {
+        return announcementId;
     }
 
-    public void setIdAnnouncement(String idAnnouncement) {
-        this.idAnnouncement = idAnnouncement;
+    public void setAnnouncementId(String announcementId) {
+        this.announcementId = announcementId;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public String getDescription() {
@@ -90,12 +90,27 @@ public class Announcement {
         this.deliveryTime = deliveryTime;
     }
 
-    public double getPropositionCustomer() {
-        return propositionCustomer;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setPropositionCustomer(double propositionCustomer) {
-        this.propositionCustomer = propositionCustomer;
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public List<DriverProposal> getDriverProposals() {
+        return driverProposals;
+    }
+
+    public void setDriverProposals(List<DriverProposal> driverProposals) {
+        this.driverProposals = driverProposals;
+    }
+    public void addDriverProposal(DriverProposal driverProposal) {
+        driverProposals.add(driverProposal);
+    }
+
+    public void removeDrivarProposal(DriverProposal driverProposal) {
+        driverProposals.remove(driverProposal);
     }
 
     public List<Item> getItems() {
@@ -112,19 +127,5 @@ public class Announcement {
 
     public void removeItem(Item item) {
         items.remove(item);
-    }
-
-    @Override
-    public String toString() {
-        return "Announcement{" +
-                "idAnnouncement='" + idAnnouncement + '\'' +
-                ", customerId='" + customerId + '\'' +
-                ", description='" + description + '\'' +
-                ", pickUpTime=" + pickUpTime +
-                ", dropUpFrom='" + dropUpFrom + '\'' +
-                ", dropTo='" + dropTo + '\'' +
-                ", deliveryTime=" + deliveryTime +
-                ", propositionCustomer=" + propositionCustomer +
-                '}';
     }
 }

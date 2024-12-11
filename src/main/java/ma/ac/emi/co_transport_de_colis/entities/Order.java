@@ -1,59 +1,64 @@
 package ma.ac.emi.co_transport_de_colis.entities;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "orders") // Stockage dans MongoDB
 public class Order {
     @Id
-    private String idOrder;
-    private String idAnnouncement;
-    private String driverId;
-    private String customerId;
+    private String orderId;
+    @DBRef
+    private Announcement announcement;
+    @DBRef
+    private Driver driver;
+    @DBRef
+    private Customer customer;
     private double amount;
     private String currentPosition;
     private String status;
 
-    public Order(String idOrder, String idAnnouncement, String driverId, String customerId, double amount, String currentPosition, String status) {
-        this.idOrder = idOrder;
-        this.idAnnouncement = idAnnouncement;
-        this.driverId = driverId;
-        this.customerId = customerId;
-        this.amount = amount;
-        this.currentPosition = currentPosition;
-        this.status = status;
+    public Order(Announcement announcement, Driver driver, Customer customer, double amount, String currentPosition, String status) {
+        this.setAnnouncement(announcement);
+        this.setDriver(driver);
+        this.setCustomer(customer);
+        this.setAmount(amount);
+        this.setCurrentPosition(currentPosition);
+        this.setStatus(status);
     }
 
-    public String getIdOrder() {
-        return idOrder;
+    public Order() {}
+
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setIdOrder(String idOrder) {
-        this.idOrder = idOrder;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public String getIdAnnouncement() {
-        return idAnnouncement;
+    public Announcement getAnnouncement() {
+        return announcement;
     }
 
-    public void setIdAnnouncement(String idAnnouncement) {
-        this.idAnnouncement = idAnnouncement;
+    public void setAnnouncement(Announcement announcement) {
+        this.announcement = announcement;
     }
 
-    public String getDriverId() {
-        return driverId;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public void setDriverId(String driverId) {
-        this.driverId = driverId;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public double getAmount() {
@@ -80,16 +85,4 @@ public class Order {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "idOrder='" + idOrder + '\'' +
-                ", idAnnouncement='" + idAnnouncement + '\'' +
-                ", driverId='" + driverId + '\'' +
-                ", customerId='" + customerId + '\'' +
-                ", amount=" + amount +
-                ", currentPosition='" + currentPosition + '\'' +
-                ", status='" + status + '\'' +
-                '}';
-    }
 }

@@ -3,6 +3,7 @@ package ma.ac.emi.co_transport_de_colis.entities;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -12,19 +13,21 @@ public class Review {
 
     @Id
     private String id;
-
-    private String orderId;
-    private String customerId;
-    private String driverId;
+    @DBRef
+    private Order order;
+    @DBRef
+    private Customer customer;
+    @DBRef
+    private Driver driver;
     @Min(1)  @Max(5)
     private int rating;
     private String comment;
     private LocalDateTime timestamp;
 
-    public Review(String orderId, String customerId, String driverId, int rating, String comment) {
-        setOrderId(orderId);
-        setCustomerId(customerId);
-        setDriverId(driverId);
+    public Review(Order order, Customer customer, Driver driver, int rating, String comment) {
+        setOrder(order);
+        setCustomer(customer);
+        setDriver(driver);
         setRating(rating);
         setComment(comment);
         setTimestamp(LocalDateTime.now());
@@ -40,28 +43,28 @@ public class Review {
         this.id = id;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public String getDriverId() {
-        return driverId;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public void setDriverId(String driverId) {
-        this.driverId = driverId;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
     public int getRating() {

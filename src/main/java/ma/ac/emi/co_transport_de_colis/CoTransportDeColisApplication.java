@@ -16,14 +16,4 @@ public class CoTransportDeColisApplication {
     public static void main(String[] args) {
         SpringApplication.run(CoTransportDeColisApplication.class, args);
     }
-
-    @Bean
-    CommandLineRunner start(AccountRepository repository) {
-        return args -> {
-            repository.deleteAll();
-            Stream.of("Elmehdi","Yasser").forEach(c->
-                    repository.save(new Account(c,c,c,c)));
-            repository.findAll().forEach(System.out::println);
-        };
-    }
 }

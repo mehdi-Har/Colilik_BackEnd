@@ -1,5 +1,7 @@
 package ma.ac.emi.co_transport_de_colis.controllers;
 
+import ma.ac.emi.co_transport_de_colis.entities.Customer;
+import ma.ac.emi.co_transport_de_colis.entities.Driver;
 import ma.ac.emi.co_transport_de_colis.entities.Review;
 import ma.ac.emi.co_transport_de_colis.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;

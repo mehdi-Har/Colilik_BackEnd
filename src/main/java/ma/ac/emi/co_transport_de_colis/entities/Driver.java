@@ -7,25 +7,27 @@ public class Driver extends User {
     private double earnings;
     private int totalDeliveries;
 
-    public Driver(String userId, String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN) {
-        super(userId, password, fullName, userEmail, numero, rating, numeroCIN, imageCIN);
+    public Driver(String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN) {
+        super(password, fullName, userEmail, numero, rating, numeroCIN, imageCIN);
     }
 
     public Driver(String numero, Double rating, String numeroCIN, String imageCIN) {
         super(numero, rating, numeroCIN, imageCIN);
     }
 
-    public Driver(String userId, String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN, double earnings, int totalDeliveries) {
-        super(userId, password, fullName, userEmail, numero, rating, numeroCIN, imageCIN);
-        this.earnings = earnings;
-        this.totalDeliveries = totalDeliveries;
+    public Driver(String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN, double earnings, int totalDeliveries) {
+        super(password, fullName, userEmail, numero, rating, numeroCIN, imageCIN);
+        this.setEarnings(earnings);
+        this.setTotalDeliveries(totalDeliveries);
     }
 
     public Driver(String numero, Double rating, String numeroCIN, String imageCIN, double earnings, int totalDeliveries) {
         super(numero, rating, numeroCIN, imageCIN);
-        this.earnings = earnings;
-        this.totalDeliveries = totalDeliveries;
+        this.setEarnings(earnings);
+        this.setTotalDeliveries(totalDeliveries);
     }
+
+    public Driver() {}
 
     public double getEarnings() {
         return earnings;
@@ -43,11 +45,4 @@ public class Driver extends User {
         this.totalDeliveries = totalDeliveries;
     }
 
-    @Override
-    public String toString() {
-        return "Driver{" +
-                "earnings=" + earnings +
-                ", totalDeliveries=" + totalDeliveries +
-                '}';
-    }
 }

@@ -20,19 +20,19 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public Account register(@RequestParam String fullName, @RequestParam String email, @RequestParam String password) {
-        return accountService.register(fullName, email, password);
+    public Account register(@RequestParam String fullName, @RequestParam String email, @RequestParam String clerkId) {
+        return accountService.register(fullName, email, clerkId);
     }
 
-    @PostMapping("/login")
-    public Account login(@RequestParam String email, @RequestParam String password) {
-        return accountService.login(email, password);
-    }
-
-    @PostMapping("/reset-password")
-    public String resetPassword(@RequestParam String email, @RequestParam String newPassword) {
-        accountService.resetPassword(email, newPassword);
-        return "Password successfully reset";
-    }
+//    @PostMapping("/login")
+//    public Account login(@RequestParam String email, @RequestParam String password) {
+//        return accountService.login(email, password);
+//    }
+//
+//    @PostMapping("/reset-password")
+//    public String resetPassword(@RequestParam String email, @RequestParam String newPassword) {
+//        accountService.resetPassword(email, newPassword);
+//        return "Password successfully reset";
+//    }
 }
 

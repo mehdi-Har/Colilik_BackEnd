@@ -6,29 +6,28 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "items")
 public class Item {
     @Id
-    private String idItem;
+    private String itemId;
     private String photo;
     private String description;
     private int quantity;
     private Dimension dimension;
     private double weight;
 
-    public Item(String idItem, String photo, String description, int quantity, Dimension dimension, double weight) {
-        this.idItem = idItem;
-        this.photo = photo;
-        this.description = description;
-        this.quantity = quantity;
-        this.dimension = dimension;
-        this.weight = weight;
+    public Item(String photo, String description, int quantity, Dimension dimension, double weight) {
+        this.setPhoto(photo);
+        this.setDescription(description);
+        this.setQuantity(quantity);
+        this.setDimension(dimension);
+        this.setWeight(weight);
     }
     public Item() {}
 
-    public String getIdItem() {
-        return idItem;
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setIdItem(String idItem) {
-        this.idItem = idItem;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     public String getPhoto() {
@@ -71,16 +70,5 @@ public class Item {
         this.weight = weight;
     }
 
-    @Override
-    public String toString() {
-        return "Item{" +
-                "idItem='" + idItem + '\'' +
-                ", photo='" + photo + '\'' +
-                ", description='" + description + '\'' +
-                ", quantity=" + quantity +
-                ", dimension=" + dimension +
-                ", weight=" + weight +
-                '}';
-    }
 }
 

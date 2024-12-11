@@ -2,16 +2,15 @@ package ma.ac.emi.co_transport_de_colis.controllers;
 
 import ma.ac.emi.co_transport_de_colis.entities.User;
 import ma.ac.emi.co_transport_de_colis.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    private UserService userService;
 
     @PostMapping
     public User createUser(@RequestBody User user) {

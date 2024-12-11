@@ -9,8 +9,8 @@ public class User extends Account {
     private String numeroCIN;
     private String imageCIN;
 
-    public User(String userId, String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN) {
-        super(userId, password, fullName, userEmail);
+    public User(String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN) {
+        super(password, fullName, userEmail);
         this.numero = numero;
         this.rating = rating;
         this.numeroCIN = numeroCIN;
@@ -23,7 +23,7 @@ public class User extends Account {
         this.numeroCIN = numeroCIN;
         this.imageCIN = imageCIN;
     }
-
+public User() {}
     public String getNumero() {
         return numero;
     }
@@ -54,15 +54,5 @@ public class User extends Account {
 
     public void setImageCIN(String imageCIN) {
         this.imageCIN = imageCIN;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                ", numero='" + numero + '\'' +
-                ", rating=" + rating +
-                ", numeroCIN='" + numeroCIN + '\'' +
-                ", imageCIN='" + imageCIN + '\'' +
-                '}';
     }
 }

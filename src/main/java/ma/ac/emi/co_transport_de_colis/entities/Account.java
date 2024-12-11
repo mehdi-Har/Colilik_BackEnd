@@ -9,24 +9,24 @@ import java.util.Objects;
 public class Account {
     @Id
     private String userId;
-    private String password;
+    private String clerkId;
     private String fullName;
     private String userEmail;
 
     public Account() {}
-    public Account(String userId, String password, String fullName, String userEmail) {
-        this.userId = userId;
-        this.password = password;
-        this.fullName = fullName;
-        this.userEmail = userEmail;
+
+    public Account(String clerkId, String fullName, String userEmail) {
+        this.setClerkId(clerkId);
+        this.setFullName(fullName);
+        this.setUserEmail(userEmail);
     }
 
     public String getUserId() {
         return userId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getClerkId() {
+        return clerkId;
     }
 
     public String getFullName() {
@@ -41,8 +41,8 @@ public class Account {
         this.userId = userId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setClerkId(String clerkId) {
+        this.clerkId = clerkId;
     }
 
     public void setFullName(String fullName) {
@@ -51,15 +51,5 @@ public class Account {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }
-
-    @Override
-    public String toString() {
-        return "Account{" +
-                "userId='" + userId + '\'' +
-                ", password='" + password + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                '}';
     }
 }
