@@ -20,8 +20,13 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public Account register(@RequestParam String fullName, @RequestParam String email, @RequestParam String clerkId) {
-        return accountService.register(fullName, email, clerkId);
+    public Account register(@RequestParam String fullName, @RequestParam String email, @RequestParam String clerkId, @RequestParam String phone) {
+        return accountService.register(fullName, email, clerkId, phone);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable String id) {
+        accountService.delete(id);
     }
 
 //    @PostMapping("/login")

@@ -12,6 +12,7 @@ public class Account {
     private String clerkId;
     private String fullName;
     private String userEmail;
+    private String phone;
 
     public Account() {}
 
@@ -51,5 +52,13 @@ public class Account {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

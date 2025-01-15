@@ -7,21 +7,24 @@ public class User extends Account {
     private String numero;
     private Double rating;
     private String numeroCIN;
+    private String imageProfil;
     private String imageCIN;
 
-    public User(String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN) {
+    public User(String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN, String imageProfil) {
         super(password, fullName, userEmail);
         this.numero = numero;
         this.rating = rating;
         this.numeroCIN = numeroCIN;
         this.imageCIN = imageCIN;
+        this.imageProfil = imageProfil;
     }
 
-    public User(String numero, Double rating, String numeroCIN, String imageCIN) {
+    public User(String numero, Double rating, String numeroCIN, String imageCIN, String imageProfil) {
         this.numero = numero;
         this.rating = rating;
         this.numeroCIN = numeroCIN;
         this.imageCIN = imageCIN;
+        this.imageProfil = imageProfil;
     }
 public User() {}
     public String getNumero() {
@@ -54,5 +57,13 @@ public User() {}
 
     public void setImageCIN(String imageCIN) {
         this.imageCIN = imageCIN;
+    }
+
+    public String getImageProfil() {
+        return imageProfil;
+    }
+
+    public void setImageProfil(String imageProfil) {
+        this.imageProfil = imageProfil;
     }
 }

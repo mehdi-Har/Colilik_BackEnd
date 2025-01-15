@@ -15,7 +15,7 @@ public class AccountService {
 
 //    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public Account register(String fullName, String email, String clerkId) {
+    public Account register(String fullName, String email, String clerkId, String phone) {
         if (accountRepository.findByUserEmail(email).isPresent()) {
             throw new IllegalArgumentException("Email already in use");
         }
@@ -23,8 +23,13 @@ public class AccountService {
         Account account = new Account();
         account.setFullName(fullName);
         account.setUserEmail(email);
+        account.setPhone(phone);
         account.setClerkId(clerkId);
         return accountRepository.save(account);
+    }
+
+    public void delete(String id) {
+        accountRepository.deleteById(id);
     }
 
 //    public Account login(String email, String password) {
