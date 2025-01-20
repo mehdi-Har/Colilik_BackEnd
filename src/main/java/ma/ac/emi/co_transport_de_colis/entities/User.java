@@ -1,39 +1,28 @@
 package ma.ac.emi.co_transport_de_colis.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "users")
 public class User extends Account {
-    private String numero;
     private Double rating;
     private String numeroCIN;
     private String imageProfil;
     private String imageCIN;
 
-    public User(String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN, String imageProfil) {
-        super(password, fullName, userEmail);
-        this.numero = numero;
-        this.rating = rating;
+
+    public User(String clerkId, String fullName, String userEmail,String numeroCIN, String imageProfil, String imageCIN) {
+        super(clerkId, fullName, userEmail);
+        this.rating = 0.0;
         this.numeroCIN = numeroCIN;
-        this.imageCIN = imageCIN;
         this.imageProfil = imageProfil;
+        this.imageCIN = imageCIN;
+
     }
 
-    public User(String numero, Double rating, String numeroCIN, String imageCIN, String imageProfil) {
-        this.numero = numero;
-        this.rating = rating;
-        this.numeroCIN = numeroCIN;
-        this.imageCIN = imageCIN;
-        this.imageProfil = imageProfil;
-    }
-public User() {}
-    public String getNumero() {
-        return numero;
-    }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
+
+    public User() {}
 
     public Double getRating() {
         return rating;

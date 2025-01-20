@@ -14,17 +14,13 @@ public class Customer extends User {
     @DBRef
     private List<Announcement> announcements= new ArrayList<>();
 
-    public Customer(String password, String fullName, String userEmail, String numero, Double rating, String numeroCIN, String imageCIN, double walletBalance, int totalOrders, String imageProfil) {
-        super( password, fullName, userEmail, numero, rating, numeroCIN, imageCIN, imageProfil);
-        this.setWalletBalance(walletBalance);
-        this.setTotalOrders(totalOrders);
-    }
-
-    public Customer(String numero, Double rating, String numeroCIN, String imageCIN, double walletBalance, int totalOrders, String imageProfil) {
-        super(numero, rating, numeroCIN, imageCIN, imageProfil);
+    public Customer(String clerkId, String fullName, String userEmail, String numeroCIN, String imageProfil, String imageCIN, double walletBalance, int totalOrders, List<Announcement> announcements) {
+        super(clerkId, fullName, userEmail, numeroCIN, imageProfil, imageCIN);
         this.walletBalance = walletBalance;
         this.totalOrders = totalOrders;
+        this.announcements = announcements;
     }
+
     public Customer() {}
 
     public List<Announcement> getAnnouncements() {

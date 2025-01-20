@@ -14,9 +14,11 @@ public class Account {
     private String userEmail;
     private String phone;
 
+
     public Account() {}
 
     public Account(String clerkId, String fullName, String userEmail) {
+        this.userId = clerkId;
         this.setClerkId(clerkId);
         this.setFullName(fullName);
         this.setUserEmail(userEmail);

@@ -19,6 +19,8 @@ public class AccountController {
         return accountService.getAllAccounts();
     }
 
+
+
     @PostMapping("/register")
     public Account register(@RequestParam String fullName, @RequestParam String email, @RequestParam String clerkId, @RequestParam String phone) {
         return accountService.register(fullName, email, clerkId, phone);
