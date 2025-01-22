@@ -1,7 +1,6 @@
 package ma.ac.emi.co_transport_de_colis.services;
 
 import ma.ac.emi.co_transport_de_colis.entities.Announcement;
-import ma.ac.emi.co_transport_de_colis.entities.DriverProposal;
 import ma.ac.emi.co_transport_de_colis.entities.Item;
 import ma.ac.emi.co_transport_de_colis.repositories.AnnouncementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +32,11 @@ public class AnnouncementService {
                 .map(announcement -> {
                     announcement.setDescription(updatedAnnouncement.getDescription());
                     announcement.setPickUpTime(updatedAnnouncement.getPickUpTime());
-                    announcement.setDropUpFrom(updatedAnnouncement.getDropUpFrom());
-                    announcement.setDropTo(updatedAnnouncement.getDropTo());
+                    announcement.setLatDepart(updatedAnnouncement.getLatDepart());
+                    announcement.setLongDepart(updatedAnnouncement.getLongDepart());
+                    announcement.setLatDest(updatedAnnouncement.getLatDest());
+                    announcement.setLongDest(updatedAnnouncement.getLongDest());
                     announcement.setDeliveryTime(updatedAnnouncement.getDeliveryTime());
-                    announcement.setDriverProposals(updatedAnnouncement.getDriverProposals());
                     return announcementRepository.save(announcement);
                 })
                 .orElseThrow(() -> new RuntimeException("Announcement not found : " + idAnnouncement));
@@ -63,20 +63,6 @@ public class AnnouncementService {
                     return announcementRepository.save(announcement);
                 })
                 .orElseThrow(() -> new RuntimeException("Annoncement not found : " + idAnnouncement));
-    }
-    public Announcement addProposal(String announcementId, DriverProposal proposal) {
-        Announcement announcement = announcementRepository.findById(announcementId)
-                .orElseThrow(() -> new RuntimeException("Annoncement not found "));
-
-        announcement.getDriverProposals().add(proposal);
-        return announcementRepository.save(announcement);
-    }
-
-    public List<DriverProposal> getProposals(String announcementId) {
-        Announcement announcement = announcementRepository.findById(announcementId)
-                .orElseThrow(() -> new RuntimeException("Annoncement not found "));
-
-        return announcement.getDriverProposals();
     }
 
     public Announcement markAnnouncementAsCompleted(String announcementId) {

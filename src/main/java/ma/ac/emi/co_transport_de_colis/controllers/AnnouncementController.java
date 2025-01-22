@@ -1,7 +1,6 @@
 package ma.ac.emi.co_transport_de_colis.controllers;
 
 import ma.ac.emi.co_transport_de_colis.entities.Announcement;
-import ma.ac.emi.co_transport_de_colis.entities.DriverProposal;
 import ma.ac.emi.co_transport_de_colis.services.AnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,15 +40,7 @@ public class AnnouncementController {
         announcementService.deleteAnnouncement(idAnnouncement);
     }
 
-    @PostMapping("/{announcementId}/proposals")
-    public Announcement addProposal(@PathVariable String announcementId, @RequestBody DriverProposal proposal) {
-        return announcementService.addProposal(announcementId, proposal);
-    }
 
-    @GetMapping("/{announcementId}/proposals")
-    public List<DriverProposal> getProposals(@PathVariable String announcementId) {
-        return announcementService.getProposals(announcementId);
-    }
 
 }
 

@@ -1,7 +1,11 @@
 package ma.ac.emi.co_transport_de_colis.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "users")
 public class User extends Account {
@@ -9,6 +13,18 @@ public class User extends Account {
     private String numeroCIN;
     private String imageProfil;
     private String imageCIN;
+    private double walletBalance;
+    private int totalOrders;
+    private int totalDeliveries;
+    private double LongDest;
+    private double latDest;
+    private double LongDepart;
+    private double latDepart;
+
+    @DBRef
+    private List<Announcement> announcements= new ArrayList<>();
+
+
 
 
     public User(String clerkId, String fullName, String userEmail,String numeroCIN, String imageProfil, String imageCIN) {
@@ -17,10 +33,75 @@ public class User extends Account {
         this.numeroCIN = numeroCIN;
         this.imageProfil = imageProfil;
         this.imageCIN = imageCIN;
+        this.walletBalance = 0.0;
+        this.totalOrders = 0;
+        this.totalDeliveries = 0;
 
     }
 
+    public double getWalletBalance() {
+        return walletBalance;
+    }
 
+    public void setWalletBalance(double walletBalance) {
+        this.walletBalance = walletBalance;
+    }
+
+    public int getTotalOrders() {
+        return totalOrders;
+    }
+
+    public void setTotalOrders(int totalOrders) {
+        this.totalOrders = totalOrders;
+    }
+
+    public int getTotalDeliveries() {
+        return totalDeliveries;
+    }
+
+    public void setTotalDeliveries(int totalDeliveries) {
+        this.totalDeliveries = totalDeliveries;
+    }
+
+    public double getLongDest() {
+        return LongDest;
+    }
+
+    public void setLongDest(double longDest) {
+        LongDest = longDest;
+    }
+
+    public double getLatDest() {
+        return latDest;
+    }
+
+    public void setLatDest(double latDest) {
+        this.latDest = latDest;
+    }
+
+    public double getLongDepart() {
+        return LongDepart;
+    }
+
+    public void setLongDepart(double longDepart) {
+        LongDepart = longDepart;
+    }
+
+    public double getLatDepart() {
+        return latDepart;
+    }
+
+    public void setLatDepart(double latDepart) {
+        this.latDepart = latDepart;
+    }
+
+    public List<Announcement> getAnnouncements() {
+        return announcements;
+    }
+
+    public void setAnnouncements(List<Announcement> announcements) {
+        this.announcements = announcements;
+    }
 
     public User() {}
 

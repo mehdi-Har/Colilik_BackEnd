@@ -1,10 +1,9 @@
 package ma.ac.emi.co_transport_de_colis.services;
 
-import ma.ac.emi.co_transport_de_colis.entities.DriverProposal;
 import ma.ac.emi.co_transport_de_colis.entities.Order;
 import ma.ac.emi.co_transport_de_colis.repositories.AnnouncementRepository;
-import ma.ac.emi.co_transport_de_colis.repositories.DriverRepository;
 import ma.ac.emi.co_transport_de_colis.repositories.OrderRepository;
+import ma.ac.emi.co_transport_de_colis.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,18 +23,10 @@ public class OrderService {
     private AnnouncementRepository announcementRepository;
 
     @Autowired
-    private DriverRepository driverRepository;
+    private UserRepository driverRepository;
 
     public Order createOrder(String announcementId, String driverId, double amount) {
-        List<DriverProposal> proposals = announcementService.getProposals(announcementId);
 
-        // Vérifier que le driverId existe dans les propositions
-        boolean proposalExists = proposals.stream()
-                .anyMatch(proposal -> proposal.getDriverId().equals(driverId));
-
-        if (!proposalExists) {
-            throw new RuntimeException("proposal not valid for this driver");
-        }
 
         Order order = new Order();
         order.setAnnouncement(announcementRepository.findById(announcementId).get());
@@ -62,7 +53,8 @@ public class OrderService {
                     order.setDriver(updatedOrder.getDriver());
                     order.setCustomer(updatedOrder.getCustomer());
                     order.setAmount(updatedOrder.getAmount());
-                    order.setCurrentPosition(updatedOrder.getCurrentPosition());
+                    order.setCurrentLatitude(updatedOrder.getCurrentLatitude());
+                    order.setCurrentLongitude(updatedOrder.getCurrentLongitude());
                     order.setStatus(updatedOrder.getStatus());
                     return orderRepository.save(order);
                 })

@@ -16,15 +16,15 @@ public class Review {
     @DBRef
     private Order order;
     @DBRef
-    private Customer customer;
+    private User customer;
     @DBRef
-    private Driver driver;
+    private User driver;
     @Min(1)  @Max(5)
     private int rating;
     private String comment;
     private LocalDateTime timestamp;
 
-    public Review(Order order, Customer customer, Driver driver, int rating, String comment) {
+    public Review(Order order, User customer, User driver, int rating, String comment) {
         setOrder(order);
         setCustomer(customer);
         setDriver(driver);
@@ -51,19 +51,19 @@ public class Review {
         this.order = order;
     }
 
-    public Customer getCustomer() {
+    public User getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(User customer) {
         this.customer = customer;
     }
 
-    public Driver getDriver() {
+    public User getDriver() {
         return driver;
     }
 
-    public void setDriver(Driver driver) {
+    public void setDriver(User driver) {
         this.driver = driver;
     }
 

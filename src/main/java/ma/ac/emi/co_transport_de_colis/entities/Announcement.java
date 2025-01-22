@@ -13,25 +13,32 @@ public class Announcement {
     @Id
     private String announcementId;
     @DBRef
-    private Customer customer;
+    private User customer;
     private String description;
     private LocalDateTime pickUpTime;
-    private String dropUpFrom;
-    private String dropTo;
+    private double longDest;
+    private double latDest;
+    private double latDepart;
+    private double longDepart;
     private LocalDateTime deliveryTime;
     private boolean status= false;
-    private List<DriverProposal> driverProposals;
     @DBRef
     private List<Item> items= new ArrayList<>();
 
-    public Announcement(Customer customer, String description, LocalDateTime pickUpTime, String dropUpFrom, String dropTo, LocalDateTime deliveryTime) {
-        this.setCustomer(customer);
-        this.setDescription(description);
-        this.setPickUpTime(pickUpTime);
-        this.setDropUpFrom(dropUpFrom);
-        this.setDropTo(dropTo);
-        this.setDeliveryTime(deliveryTime);
+    public Announcement(String announcementId, User customer, String description, LocalDateTime pickUpTime, double longDest, double latDest, double latDepart, double longDepart, LocalDateTime deliveryTime, boolean status, List<Item> items) {
+        this.announcementId = announcementId;
+        this.customer = customer;
+        this.description = description;
+        this.pickUpTime = pickUpTime;
+        this.longDest = longDest;
+        this.latDest = latDest;
+        this.latDepart = latDepart;
+        this.longDepart = longDepart;
+        this.deliveryTime = deliveryTime;
+        this.status = status;
+        this.items = items;
     }
+
     public Announcement(){}
 
     public String getAnnouncementId() {
@@ -42,11 +49,11 @@ public class Announcement {
         this.announcementId = announcementId;
     }
 
-    public Customer getCustomer() {
+    public User getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(User customer) {
         this.customer = customer;
     }
 
@@ -66,20 +73,36 @@ public class Announcement {
         this.pickUpTime = pickUpTime;
     }
 
-    public String getDropUpFrom() {
-        return dropUpFrom;
+    public double getLongDest() {
+        return longDest;
     }
 
-    public void setDropUpFrom(String dropUpFrom) {
-        this.dropUpFrom = dropUpFrom;
+    public void setLongDest(double longDest) {
+        this.longDest = longDest;
     }
 
-    public String getDropTo() {
-        return dropTo;
+    public double getLatDest() {
+        return latDest;
     }
 
-    public void setDropTo(String dropTo) {
-        this.dropTo = dropTo;
+    public void setLatDest(double latDest) {
+        this.latDest = latDest;
+    }
+
+    public double getLatDepart() {
+        return latDepart;
+    }
+
+    public void setLatDepart(double latDepart) {
+        this.latDepart = latDepart;
+    }
+
+    public double getLongDepart() {
+        return longDepart;
+    }
+
+    public void setLongDepart(double longDepart) {
+        this.longDepart = longDepart;
     }
 
     public LocalDateTime getDeliveryTime() {
@@ -96,21 +119,6 @@ public class Announcement {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public List<DriverProposal> getDriverProposals() {
-        return driverProposals;
-    }
-
-    public void setDriverProposals(List<DriverProposal> driverProposals) {
-        this.driverProposals = driverProposals;
-    }
-    public void addDriverProposal(DriverProposal driverProposal) {
-        driverProposals.add(driverProposal);
-    }
-
-    public void removeDrivarProposal(DriverProposal driverProposal) {
-        driverProposals.remove(driverProposal);
     }
 
     public List<Item> getItems() {

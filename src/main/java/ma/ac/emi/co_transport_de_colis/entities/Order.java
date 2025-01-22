@@ -4,27 +4,29 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "orders") // Stockage dans MongoDB
+@Document(collection = "orders")
 public class Order {
     @Id
     private String orderId;
     @DBRef
     private Announcement announcement;
     @DBRef
-    private Driver driver;
+    private User driver;
     @DBRef
-    private Customer customer;
+    private User customer;
     private double amount;
-    private String currentPosition;
     private String status;
+    private double currentLatitude;
+    private double currentLongitude;
 
-    public Order(Announcement announcement, Driver driver, Customer customer, double amount, String currentPosition, String status) {
-        this.setAnnouncement(announcement);
-        this.setDriver(driver);
-        this.setCustomer(customer);
-        this.setAmount(amount);
-        this.setCurrentPosition(currentPosition);
-        this.setStatus(status);
+    public Order(Announcement announcement, User driver, User customer, double amount, String status, double currentLatitude, double currentLongitude) {
+        this.announcement = announcement;
+        this.driver = driver;
+        this.customer = customer;
+        this.amount = amount;
+        this.status = status;
+        this.currentLatitude = currentLatitude;
+        this.currentLongitude = currentLongitude;
     }
 
     public Order() {}
@@ -45,19 +47,19 @@ public class Order {
         this.announcement = announcement;
     }
 
-    public Driver getDriver() {
+    public User getDriver() {
         return driver;
     }
 
-    public void setDriver(Driver driver) {
+    public void setDriver(User driver) {
         this.driver = driver;
     }
 
-    public Customer getCustomer() {
+    public User getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(User customer) {
         this.customer = customer;
     }
 
@@ -69,12 +71,20 @@ public class Order {
         this.amount = amount;
     }
 
-    public String getCurrentPosition() {
-        return currentPosition;
+    public double getCurrentLatitude() {
+        return currentLatitude;
     }
 
-    public void setCurrentPosition(String currentPosition) {
-        this.currentPosition = currentPosition;
+    public void setCurrentLatitude(double currentLatitude) {
+        this.currentLatitude = currentLatitude;
+    }
+
+    public double getCurrentLongitude() {
+        return currentLongitude;
+    }
+
+    public void setCurrentLongitude(double currentLongitude) {
+        this.currentLongitude = currentLongitude;
     }
 
     public String getStatus() {

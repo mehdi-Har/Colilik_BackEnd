@@ -13,15 +13,15 @@ public class Payment {
     @DBRef
     private Order order;
     @DBRef
-    private Customer customer;
+    private User customer;
     @DBRef
-    private Driver driver;
+    private User driver;
 
     private double amount;
     private PaymentStrategy paymentStrategy;
     private LocalDateTime timestamp;
 
-    public Payment(Order order, Customer customer, Driver driver, double amount, PaymentStrategy paymentStrategy, LocalDateTime timestamp) {
+    public Payment(Order order, User customer, User driver, double amount, PaymentStrategy paymentStrategy, LocalDateTime timestamp) {
         this.setOrder(order);
         this.setCustomer(customer);
         this.setDriver(driver);
@@ -49,19 +49,19 @@ public class Payment {
         this.order = order;
     }
 
-    public Customer getCustomer() {
+    public User getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(User customer) {
         this.customer = customer;
     }
 
-    public Driver getDriver() {
+    public User getDriver() {
         return driver;
     }
 
-    public void setDriver(Driver driver) {
+    public void setDriver(User driver) {
         this.driver = driver;
     }
 

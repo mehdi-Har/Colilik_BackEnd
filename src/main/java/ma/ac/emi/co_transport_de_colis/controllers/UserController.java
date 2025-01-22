@@ -46,6 +46,7 @@ public class UserController {
             @RequestParam String email,
             @RequestParam String clerkId,
             @RequestParam String phone,
+            @RequestParam String numeroCIN,
             @RequestParam(required = false) MultipartFile imageCIN,
             @RequestParam(required = false) MultipartFile imageProfile) throws IOException {
 
@@ -59,7 +60,7 @@ public class UserController {
         saveFile(imageCIN, userDirectoryPath + File.separator + "cin.png");
         saveFile(imageProfile, userDirectoryPath + File.separator + "profile.png");
 
-        User user = userService.register(fullName, email, clerkId, phone, userDirectoryPath);
+        User user = userService.register(fullName, email, clerkId, phone, userDirectoryPath,numeroCIN);
         return ResponseEntity.ok(user);
     }
 

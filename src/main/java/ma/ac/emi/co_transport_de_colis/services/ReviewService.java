@@ -1,10 +1,7 @@
 package ma.ac.emi.co_transport_de_colis.services;
 
 import ma.ac.emi.co_transport_de_colis.entities.Review;
-import ma.ac.emi.co_transport_de_colis.repositories.CustomerRepository;
-import ma.ac.emi.co_transport_de_colis.repositories.DriverRepository;
-import ma.ac.emi.co_transport_de_colis.repositories.OrderRepository;
-import ma.ac.emi.co_transport_de_colis.repositories.ReviewRepository;
+import ma.ac.emi.co_transport_de_colis.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +16,9 @@ public class ReviewService {
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserRepository customerRepository;
     @Autowired
-    private DriverRepository driverRepository;
+    private UserRepository driverRepository;
 
 
     public Review addReview(String orderId, String customerId, String driverId, int rating, String comment) {
