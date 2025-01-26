@@ -30,10 +30,16 @@ public class ItemService {
         return itemRepository.findById(idItem)
                 .map(item -> {
                     item.setPhoto(updatedItem.getPhoto());
-                    item.setDescription(updatedItem.getDescription());
                     item.setQuantity(updatedItem.getQuantity());
                     item.setDimension(updatedItem.getDimension());
-                    item.setWeight(updatedItem.getWeight());
+                    return itemRepository.save(item);
+                })
+                .orElseThrow(() -> new RuntimeException("Item not found : " + idItem));
+    }
+    public Item updateItemPhoto(String idItem, String photo) {
+        return itemRepository.findById(idItem)
+                .map(item -> {
+                    item.setPhoto(photo);
                     return itemRepository.save(item);
                 })
                 .orElseThrow(() -> new RuntimeException("Item not found : " + idItem));

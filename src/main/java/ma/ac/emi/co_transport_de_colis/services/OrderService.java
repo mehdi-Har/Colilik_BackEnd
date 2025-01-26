@@ -25,16 +25,7 @@ public class OrderService {
     @Autowired
     private UserRepository driverRepository;
 
-    public Order createOrder(String announcementId, String driverId, double amount) {
-
-
-        Order order = new Order();
-        order.setAnnouncement(announcementRepository.findById(announcementId).get());
-        order.setDriver(driverRepository.findById(driverId).get());
-        order.setAmount(amount);
-
-        announcementService.markAnnouncementAsCompleted(announcementId);
-
+    public Order createOrder(Order order) {
         return orderRepository.save(order);
     }
 
@@ -46,21 +37,9 @@ public class OrderService {
         return orderRepository.findById(idOrder);
     }
 
-    public Order updateOrder(String idOrder, Order updatedOrder) {
-        return orderRepository.findById(idOrder)
-                .map(order -> {
-                    order.setAnnouncement(updatedOrder.getAnnouncement());
-                    order.setDriver(updatedOrder.getDriver());
-                    order.setCustomer(updatedOrder.getCustomer());
-                    order.setAmount(updatedOrder.getAmount());
-                    order.setCurrentLatitude(updatedOrder.getCurrentLatitude());
-                    order.setCurrentLongitude(updatedOrder.getCurrentLongitude());
-                    order.setStatus(updatedOrder.getStatus());
-                    return orderRepository.save(order);
-                })
-                .orElseThrow(() -> new RuntimeException("Order not found : " + idOrder));
+    public List<Order> getOrdersByClerkId(String clerkId) {
+        return orderRepository.findByCustomerId(clerkId);
     }
-
     public void deleteOrder(String idOrder) {
         orderRepository.deleteById(idOrder);
     }

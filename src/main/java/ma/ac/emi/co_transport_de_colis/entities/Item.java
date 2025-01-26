@@ -1,6 +1,8 @@
 package ma.ac.emi.co_transport_de_colis.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "items")
@@ -8,18 +10,18 @@ public class Item {
     @Id
     private String itemId;
     private String photo;
-    private String description;
     private int quantity;
-    private Dimension dimension;
-    private double weight;
+    private int  dimension;
 
-    public Item(String photo, String description, int quantity, Dimension dimension, double weight) {
-        this.setPhoto(photo);
-        this.setDescription(description);
-        this.setQuantity(quantity);
-        this.setDimension(dimension);
-        this.setWeight(weight);
+    private String anoucmentId;
+
+    public Item(String photo, int quantity, int dimension, String anoucmentId) {
+        this.photo = photo;
+        this.quantity = quantity;
+        this.dimension = dimension;
+        this.anoucmentId = anoucmentId;
     }
+
     public Item() {}
 
     public String getItemId() {
@@ -38,13 +40,6 @@ public class Item {
         this.photo = photo;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public int getQuantity() {
         return quantity;
@@ -54,21 +49,20 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public Dimension getDimension() {
+    public int getDimension() {
         return dimension;
     }
 
-    public void setDimension(Dimension dimension) {
+    public void setDimension(int dimension) {
         this.dimension = dimension;
     }
 
-    public double getWeight() {
-        return weight;
+    public String getAnoucmentId() {
+        return anoucmentId;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setAnoucmentId(String anoucmentId) {
+        this.anoucmentId = anoucmentId;
     }
-
 }
 

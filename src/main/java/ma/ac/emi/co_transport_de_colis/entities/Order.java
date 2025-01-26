@@ -1,8 +1,16 @@
 package ma.ac.emi.co_transport_de_colis.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import ma.ac.emi.co_transport_de_colis.Enums.EnumStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
 @Document(collection = "orders")
 public class Order {
@@ -10,27 +18,25 @@ public class Order {
     private String orderId;
     @DBRef
     private Announcement announcement;
-    @DBRef
-    private User driver;
-    @DBRef
-    private User customer;
-    private double amount;
-    private String status;
+    private String driverId;
+    private String customerId;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private EnumStatus status;
     private double currentLatitude;
     private double currentLongitude;
 
-    public Order(Announcement announcement, User driver, User customer, double amount, String status, double currentLatitude, double currentLongitude) {
+
+    public Order(Announcement announcement, String driverId, String customerId, EnumStatus status, double currentLatitude, double currentLongitude) {
         this.announcement = announcement;
-        this.driver = driver;
-        this.customer = customer;
-        this.amount = amount;
+        this.driverId = driverId;
+        this.customerId = customerId;
         this.status = status;
         this.currentLatitude = currentLatitude;
         this.currentLongitude = currentLongitude;
+
     }
 
     public Order() {}
-
     public String getOrderId() {
         return orderId;
     }
@@ -47,28 +53,20 @@ public class Order {
         this.announcement = announcement;
     }
 
-    public User getDriver() {
-        return driver;
+    public String getDriverId() {
+        return driverId;
     }
 
-    public void setDriver(User driver) {
-        this.driver = driver;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public User getCustomer() {
-        return customer;
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
     }
 
-    public void setCustomer(User customer) {
-        this.customer = customer;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public double getCurrentLatitude() {
@@ -87,12 +85,14 @@ public class Order {
         this.currentLongitude = currentLongitude;
     }
 
-    public String getStatus() {
+    public EnumStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(EnumStatus status) {
         this.status = status;
     }
+
+
 
 }

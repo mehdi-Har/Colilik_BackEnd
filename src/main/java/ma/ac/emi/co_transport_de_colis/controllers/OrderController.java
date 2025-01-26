@@ -15,17 +15,17 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-//    @PostMapping
-//    public Order createOrder(@RequestBody Order order) {
-//        return orderService.createOrder(order);
-//    }
     @PostMapping
-    public Order createOrder(
-            @RequestParam String announcementId,
-            @RequestParam String driverId,
-            @RequestParam double amount) {
-        return orderService.createOrder(announcementId, driverId, amount);
+    public Order createOrder(@RequestBody Order order) {
+        return orderService.createOrder(order);
     }
+//    @PostMapping
+//    public Order createOrder(
+//            @RequestParam String announcementId,
+//            @RequestParam String driverId,
+//            @RequestParam double amount) {
+//        return orderService.createOrder(announcementId, driverId);
+//    }
 
     @GetMapping
     public List<Order> getAllOrders() {
@@ -37,11 +37,14 @@ public class OrderController {
         return orderService.getOrderById(idOrder);
     }
 
-    @PutMapping("/{idOrder}")
-    public Order updateOrder(@PathVariable String idOrder, @RequestBody Order updatedOrder) {
-        return orderService.updateOrder(idOrder, updatedOrder);
+//    @PutMapping("/{idOrder}")
+//    public Order updateOrder(@PathVariable String idOrder, @RequestBody Order updatedOrder) {
+//        return orderService.updateOrder(idOrder, updatedOrder);
+//    }
+    @GetMapping("/ordersById/{clerkId}")
+    public List<Order> getOrdersByClerkId(@PathVariable String clerkId) {
+        return orderService.getOrdersByClerkId(clerkId);
     }
-
     @DeleteMapping("/{idOrder}")
     public void deleteOrder(@PathVariable String idOrder) {
         orderService.deleteOrder(idOrder);

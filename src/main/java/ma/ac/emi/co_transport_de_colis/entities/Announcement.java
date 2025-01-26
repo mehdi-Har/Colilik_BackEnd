@@ -1,9 +1,12 @@
 package ma.ac.emi.co_transport_de_colis.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import ma.ac.emi.co_transport_de_colis.Enums.EnumStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,30 +15,43 @@ import java.util.List;
 public class Announcement {
     @Id
     private String announcementId;
-    @DBRef
-    private User customer;
-    private String description;
+
+    private String customerId;
     private LocalDateTime pickUpTime;
     private double longDest;
     private double latDest;
     private double latDepart;
     private double longDepart;
+    private String destination;
+    private String depart;
     private LocalDateTime deliveryTime;
-    private boolean status= false;
+    private LocalDate date;
+    private String senderName;
+    private String phoneNumber;
+    private String alternativeSenderPhoneNumber;
+    private String receiverName;
+    private String receiverPhoneNumber;
+    private String alternativeReceiverPhoneNumber;
     @DBRef
     private List<Item> items= new ArrayList<>();
 
-    public Announcement(String announcementId, User customer, String description, LocalDateTime pickUpTime, double longDest, double latDest, double latDepart, double longDepart, LocalDateTime deliveryTime, boolean status, List<Item> items) {
-        this.announcementId = announcementId;
-        this.customer = customer;
-        this.description = description;
+    public Announcement(String customerId, LocalDateTime pickUpTime, double longDest, double latDest, double latDepart, double longDepart, String destination, String depart, LocalDateTime deliveryTime, LocalDate date, String senderName, String phoneNumber, String alternativeSenderPhoneNumber, String receiverName, String receiverPhoneNumber, String alternativeReceiverPhoneNumber, List<Item> items) {
+        this.customerId = customerId;
         this.pickUpTime = pickUpTime;
         this.longDest = longDest;
         this.latDest = latDest;
         this.latDepart = latDepart;
         this.longDepart = longDepart;
+        this.destination = destination;
+        this.depart = depart;
         this.deliveryTime = deliveryTime;
-        this.status = status;
+        this.date = date;
+        this.senderName = senderName;
+        this.phoneNumber = phoneNumber;
+        this.alternativeSenderPhoneNumber = alternativeSenderPhoneNumber;
+        this.receiverName = receiverName;
+        this.receiverPhoneNumber = receiverPhoneNumber;
+        this.alternativeReceiverPhoneNumber = alternativeReceiverPhoneNumber;
         this.items = items;
     }
 
@@ -49,20 +65,12 @@ public class Announcement {
         this.announcementId = announcementId;
     }
 
-    public User getCustomer() {
-        return customer;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(User customer) {
-        this.customer = customer;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public LocalDateTime getPickUpTime() {
@@ -113,14 +121,6 @@ public class Announcement {
         this.deliveryTime = deliveryTime;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
     public List<Item> getItems() {
         return items;
     }
@@ -136,4 +136,80 @@ public class Announcement {
     public void removeItem(Item item) {
         items.remove(item);
     }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public String getDepart() {
+        return depart;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setDepart(String depart) {
+        this.depart = depart;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getAlternativeSenderPhoneNumber() {
+        return alternativeSenderPhoneNumber;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public String getReceiverPhoneNumber() {
+        return receiverPhoneNumber;
+    }
+
+    public String getAlternativeReceiverPhoneNumber() {
+        return alternativeReceiverPhoneNumber;
+    }
+
+
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAlternativeSenderPhoneNumber(String alternativeSenderPhoneNumber) {
+        this.alternativeSenderPhoneNumber = alternativeSenderPhoneNumber;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public void setReceiverPhoneNumber(String receiverPhoneNumber) {
+        this.receiverPhoneNumber = receiverPhoneNumber;
+    }
+
+    public void setAlternativeReceiverPhoneNumber(String alternativeReceiverPhoneNumber) {
+        this.alternativeReceiverPhoneNumber = alternativeReceiverPhoneNumber;
+    }
+
+
 }

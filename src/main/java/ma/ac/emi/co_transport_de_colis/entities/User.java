@@ -1,5 +1,7 @@
 package ma.ac.emi.co_transport_de_colis.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,6 +22,9 @@ public class User extends Account {
     private double latDest;
     private double LongDepart;
     private double latDepart;
+    @JsonBackReference
+    @DBRef
+    private List<Order> orders = new ArrayList<>();
 
     @DBRef
     private List<Announcement> announcements= new ArrayList<>();
@@ -135,5 +140,13 @@ public class User extends Account {
 
     public void setImageProfil(String imageProfil) {
         this.imageProfil = imageProfil;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

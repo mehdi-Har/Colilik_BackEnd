@@ -30,7 +30,6 @@ public class AnnouncementService {
     public Announcement updateAnnouncement(String idAnnouncement, Announcement updatedAnnouncement) {
         return announcementRepository.findById(idAnnouncement)
                 .map(announcement -> {
-                    announcement.setDescription(updatedAnnouncement.getDescription());
                     announcement.setPickUpTime(updatedAnnouncement.getPickUpTime());
                     announcement.setLatDepart(updatedAnnouncement.getLatDepart());
                     announcement.setLongDepart(updatedAnnouncement.getLongDepart());
@@ -65,11 +64,19 @@ public class AnnouncementService {
                 .orElseThrow(() -> new RuntimeException("Annoncement not found : " + idAnnouncement));
     }
 
-    public Announcement markAnnouncementAsCompleted(String announcementId) {
-        Announcement announcement = announcementRepository.findById(announcementId)
-                .orElseThrow(() -> new RuntimeException("Annoncement not found "));
+    public void updateAnnouncementWithItems(String announcementId, List<Item> savedItems) {
+        Optional<Announcement> optionalAnnouncement = announcementRepository.findById(announcementId);
 
-        announcement.setStatus(true);
-        return announcementRepository.save(announcement);
+        if (optionalAnnouncement.isPresent()) {
+            Announcement announcement = optionalAnnouncement.get();
+
+            // Update the announcement's items
+            announcement.setItems(savedItems);
+
+            // Save the updated announcement
+            announcementRepository.save(announcement);
+        } else {
+            throw new IllegalArgumentException("Announcement with ID " + announcementId + " not found.");
+        }
     }
 }
