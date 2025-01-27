@@ -45,4 +45,7 @@ public class UserService {
         return userRepository.findUserIdByClerkId(clerkId);
 
     }
+    public List<User> getAllDrivers() {
+        return userRepository.findByIsDriverTrue();
+    }
 }

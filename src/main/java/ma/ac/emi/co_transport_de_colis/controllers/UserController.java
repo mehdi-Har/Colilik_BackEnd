@@ -2,6 +2,7 @@ package ma.ac.emi.co_transport_de_colis.controllers;
 
 import ma.ac.emi.co_transport_de_colis.entities.User;
 import ma.ac.emi.co_transport_de_colis.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
@@ -113,5 +118,58 @@ public class UserController {
     @GetMapping("/getId/{clerkId}")
     public String getUserIdByClerkId(@PathVariable("clerkId") String clerkId) {
         return userService.getUserIdByClerkId(clerkId);
+    }
+    @GetMapping("/drivers/nearby")
+    public ResponseEntity<List<User>> getNearbyDrivers(
+            @RequestParam double pickupLongitude,
+            @RequestParam double pickupLatitude,
+            @RequestParam double destinationLongitude,
+            @RequestParam double destinationLatitude,
+            @RequestParam String pickupTime,
+            @RequestParam String deliveryTime,
+            @RequestParam double toleranceDistance,  // Tolerance in km
+            @RequestParam long toleranceTimeInMinutes // Tolerance in minutes
+    ) {
+        try {
+            LocalDateTime pickUpTimeParsed = LocalDateTime.parse(pickupTime);
+            LocalDateTime deliveryTimeParsed = LocalDateTime.parse(deliveryTime);
+
+            List<User> allDrivers = userService.getAllDrivers(); // Add a service to filter drivers
+            List<User> nearbyDrivers = allDrivers.stream()
+                    .filter(driver -> {
+                        double distanceToPickup = calculateDistance(
+                                pickupLatitude, pickupLongitude,
+                                driver.getLatDepart(), driver.getLongDepart());
+                        double distanceToDestination = calculateDistance(
+                                destinationLatitude, destinationLongitude,
+                                driver.getLatDest(), driver.getLongDest());
+                        long pickupTimeDifference = Math.abs(Duration.between(driver.getPickUpTime(), pickUpTimeParsed).toMinutes());
+                        long deliveryTimeDifference = Math.abs(Duration.between(driver.getDeliveryTime(), deliveryTimeParsed).toMinutes());
+
+                        return distanceToPickup <= toleranceDistance &&
+                                distanceToDestination <= toleranceDistance &&
+                                pickupTimeDifference <= toleranceTimeInMinutes &&
+                                deliveryTimeDifference <= toleranceTimeInMinutes;
+                    })
+                    .sorted(Comparator.comparingDouble(User::getRating).reversed()) // Sort by rating
+                    .limit(10)
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(nearbyDrivers);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        // Haversine formula implementation for geospatial distance in kilometers
+        final int R = 6371; // Earth's radius in km
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c; // Distance in km
     }
 }

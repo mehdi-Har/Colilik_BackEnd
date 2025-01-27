@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class TestOrderService {
@@ -37,6 +38,24 @@ public class TestOrderService {
                 "cin.jpg"
         );
         userRepository.save(testUser);
+
+
+        User testDriver = new User(
+                "2", // Driver ID
+                "Jane Smith", // Driver Name
+                "jane.smith@example.com", // Email
+                "CD789012", // License
+                "driver_profile.jpg", // Profile picture
+                "driver_cin.jpg" // CIN
+        );
+        testDriver.setLatDepart(37.7749); // Driver's pickup latitude
+        testDriver.setLongDepart(-122.4194); // Driver's pickup longitude
+        testDriver.setLatDest(37.7849); // Driver's destination latitude
+        testDriver.setLongDest(-122.4094); // Driver's destination longitude
+        testDriver.setPickUpTime(LocalDateTime.parse("2025-01-27T08:00:00")); // Pickup time
+        testDriver.setDeliveryTime(LocalDateTime.parse("2025-01-27T08:30:00"));
+        testDriver.setDriver(true);
+        userRepository.save(testDriver);
         Announcement announcement = announcementRepository.findById("679638cece3ef9774fb41375")
                 .orElseThrow(() -> new IllegalArgumentException("Announcement not found"));
 
