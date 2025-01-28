@@ -1,5 +1,6 @@
 package ma.ac.emi.co_transport_de_colis.entities;
 
+import ma.ac.emi.co_transport_de_colis.Enums.RequestStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,14 +11,24 @@ public class Request {
     private String announcementId;
     private String driverId;
     private String customerId;
+    private RequestStatus status = RequestStatus.PENDING;
 
-    public Request(String announcementId, String driverId, String customerId) {
+    public Request(String announcementId, String driverId, String customerId , RequestStatus status) {
         this.announcementId = announcementId;
         this.driverId = driverId;
         this.customerId = customerId;
+        this.status = status;
     }
 
     public Request() {
+    }
+
+    public RequestStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(RequestStatus status) {
+        this.status = status;
     }
 
     public String getId() {

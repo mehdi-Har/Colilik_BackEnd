@@ -28,10 +28,10 @@ public class Announcement {
     private LocalDate date;
     private String senderName;
     private String phoneNumber;
-    private String alternativeSenderPhoneNumber;
+    private String alternativeSenderPhoneNumber = "";
     private String receiverName;
     private String receiverPhoneNumber;
-    private String alternativeReceiverPhoneNumber;
+    private String alternativeReceiverPhoneNumber = "";
     @DBRef
     private List<Item> items= new ArrayList<>();
 
